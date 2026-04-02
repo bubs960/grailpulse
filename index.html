@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrailPulse — Coming Soon</title>
+<meta name="description" content="Pre-order alerts and price intelligence for serious collectors. Action figures, Hot Toys, Hot Wheels, Barbie, and designer toys. Join the waitlist.">
+<meta property="og:title" content="GrailPulse — The pulse of the collector market.">
+<meta property="og:description" content="Know what's dropping before it sells out. Join the waitlist.">
+<meta name="theme-color" content="#080A0D">
+
+<!--
+  SETUP INSTRUCTIONS (read before deploying):
+
+  1. EMAIL BACKEND (Formspree — free):
+     → Go to formspree.io and create a free account
+     → Click "New Form" → name it "GrailPulse Waitlist"
+     → Copy your Form ID (looks like: xpzgkwab)
+     → Replace YOUR_FORMSPREE_ID below with that ID
+     → Free tier: 50 submissions/month. Upgrade when needed.
+
+  2. HOSTING (GitHub Pages — free):
+     → Create a new GitHub repo (e.g. "grailpulse-site")
+     → Upload this file as "index.html"  
+     → Settings → Pages → Branch: main → Save
+     → Custom domain: add "GrailPulse.com"
+     → In your domain registrar DNS: add CNAME www → your-username.github.io
+     → Wait 10–30 min for DNS propagation
+
+  3. CORS for future KB hosting:
+     → GitHub Pages automatically serves with permissive CORS — no config needed
+     → /kb/ folder will be fetchable from FigurePinner extension
+
+  That's it. Three steps, live in under an hour.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:       #080A0D;
+  --surface:  #0D1018;
+  --border:   #181E2A;
+  --border-2: #222A38;
+  --gold:     #C8923A;
+  --gold-dim: #7A5520;
+  --gold-bg:  rgba(200,146,58,0.08);
+  --text:     #EAE5DC;
+  --text-2:   #8A857C;
+  --text-3:   #3E3A35;
+  --ff-disp:  'Cormorant Garamond', Georgia, serif;
+  --ff-body:  'IBM Plex Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle grid texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Radial vignette over grid */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, var(--bg) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Main content */
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 580px;
+  text-align: center;
+}
+
+/* Staggered entrance */
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: reveal 0.7s ease forwards;
+}
+.d0 { animation-delay: 0ms; }
+.d1 { animation-delay: 180ms; }
+.d2 { animation-delay: 360ms; }
+.d3 { animation-delay: 540ms; }
+.d4 { animation-delay: 720ms; }
+.d5 { animation-delay: 900ms; }
+.d6 { animation-delay: 1060ms; }
+
+@keyframes reveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Logo */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3rem;
+  text-decoration: none;
+}
+.logo-name {
+  font-family: var(--ff-disp);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(200,146,58,0.5); }
+  50%  { opacity: 0.7; transform: scale(0.75); box-shadow: 0 0 0 6px rgba(200,146,58,0); }
+}
+
+/* Eyebrow */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+.eyebrow::before,
+.eyebrow::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--gold-dim);
+}
+
+/* Headline */
+.headline {
+  font-family: var(--ff-disp);
+  font-size: clamp(38px, 8vw, 64px);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+.headline em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+/* Subhead */
+.subhead {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-2);
+  line-height: 1.6;
+  max-width: 420px;
+  margin: 0 auto 2.5rem;
+}
+
+/* Category selector */
+.cat-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.cat-btn {
+  background: transparent;
+  border: 1px solid var(--border-2);
+  color: var(--text-2);
+  padding: 7px 15px;
+  border-radius: 20px;
+  font-family: var(--ff-body);
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+.cat-btn:hover {
+  border-color: var(--gold-dim);
+  color: var(--text);
+}
+.cat-btn.selected {
+  background: var(--gold-bg);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* Form */
+.form-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.input-row {
+  display: flex;
+  border: 1px solid var(--border-2);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--surface);
+  transition: border-color 0.18s;
+}
+.input-row:focus-within {
+  border-color: var(--gold-dim);
+}
+.email-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 13px 16px;
+  font-family: var(--ff-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text);
+}
+.email-input::placeholder { color: var(--text-3); }
+.submit-btn {
+  background: var(--gold);
+  color: #060708;
+  border: none;
+  padding: 13px 22px;
+  font-family: var(--ff-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  transition: background 0.18s, transform 0.1s;
+}
+.submit-btn:hover { background: #D9A042; }
+.submit-btn:active { transform: scale(0.98); }
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+}
+.form-note {
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+/* Success state */
+.success-msg {
+  display: none;
+  padding: 1.25rem;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-dim);
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 400;
+  line-height: 1.5;
+}
+.success-msg.visible { display: block; }
+
+/* Divider */
+.divider {
+  width: 48px;
+  height: 1px;
+  background: var(--border-2);
+  margin: 2.5rem auto;
+}
+
+/* Credit */
+.credit {
+  font-size: 12px;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+}
+.credit a {
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.credit a:hover { color: var(--gold); }
+
+/* Validation */
+.error-msg {
+  font-size: 12px;
+  color: #E24B4A;
+  text-align: center;
+  display: none;
+  margin-top: -4px;
+}
+.error-msg.visible { display: block; }
+
+@media (max-width: 480px) {
+  .input-row { flex-direction: column; }
+  .submit-btn { width: 100%; padding: 13px; text-align: center; }
+  .logo { margin-bottom: 2.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Logo -->
+  <a href="#" class="logo fade-in d0">
+    <span class="logo-name">GrailPulse</span>
+    <span class="pulse-dot"></span>
+  </a>
+
+  <!-- Eyebrow -->
+  <div class="eyebrow fade-in d1">Coming soon</div>
+
+  <!-- Headline -->
+  <h1 class="headline fade-in d2">
+    The pulse of the<br><em>collector market.</em>
+  </h1>
+
+  <!-- Subhead -->
+  <p class="subhead fade-in d3">
+    Pre-order alerts and price intelligence for serious collectors.
+    Know what's dropping before it sells out.
+  </p>
+
+  <!-- Category selector -->
+  <div class="fade-in d4">
+    <p class="cat-label">What do you collect?</p>
+    <div class="categories" id="categories">
+      <button class="cat-btn" data-cat="action-figures" onclick="toggleCat(this)">Action Figures</button>
+      <button class="cat-btn" data-cat="hot-toys" onclick="toggleCat(this)">Hot Toys</button>
+      <button class="cat-btn" data-cat="hot-wheels" onclick="toggleCat(this)">Hot Wheels</button>
+      <button class="cat-btn" data-cat="barbie" onclick="toggleCat(this)">Barbie</button>
+      <button class="cat-btn" data-cat="designer-toys" onclick="toggleCat(this)">Designer Toys</button>
+    </div>
+  </div>
+
+  <!-- Email form -->
+  <!--
+    FORMSPREE SETUP:
+    1. Go to formspree.io → new account → "New Form"
+    2. Copy your Form ID and replace YOUR_FORMSPREE_ID below
+    3. The "categories" hidden field sends selected categories automatically
+  -->
+  <form
+    id="waitlist-form"
+    action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+    method="POST"
+    class="form-wrap fade-in d5"
+    onsubmit="handleSubmit(event)">
+
+    <input type="hidden" name="categories" id="categories-field" value="none selected">
+    <input type="hidden" name="_subject" value="New GrailPulse waitlist signup">
+    <input type="hidden" name="_next" value="">
+
+    <div class="input-row">
+      <input
+        type="email"
+        name="email"
+        id="email-input"
+        class="email-input"
+        placeholder="your@email.com"
+        required
+        autocomplete="email">
+      <button type="submit" class="submit-btn" id="submit-btn">
+        Notify me first
+      </button>
+    </div>
+
+    <div class="error-msg" id="error-msg">
+      Please enter a valid email address.
+    </div>
+
+    <p class="form-note">Free forever &nbsp;&middot;&nbsp; No spam &nbsp;&middot;&nbsp; Unsubscribe anytime</p>
+  </form>
+
+  <!-- Success state (replaces form after submit) -->
+  <div class="success-msg fade-in" id="success-msg">
+    You're on the list. We'll reach out first when GrailPulse launches.
+  </div>
+
+  <div class="divider fade-in d6"></div>
+
+  <p class="credit fade-in d6">
+    Built by <a href="https://www.whatnot.com/user/bubs960" target="_blank" rel="noopener">Bubs960 Collectibles</a>
+    &nbsp;&middot;&nbsp; A real collector, building real tools.
+  </p>
+
+</div>
+
+<script>
+var selectedCats = [];
+
+function toggleCat(btn) {
+  var cat = btn.dataset.cat;
+  var idx = selectedCats.indexOf(cat);
+  if (idx === -1) {
+    selectedCats.push(cat);
+    btn.classList.add('selected');
+  } else {
+    selectedCats.splice(idx, 1);
+    btn.classList.remove('selected');
+  }
+  document.getElementById('categories-field').value =
+    selectedCats.length ? selectedCats.join(', ') : 'none selected';
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  var email = document.getElementById('email-input').value.trim();
+  var btn = document.getElementById('submit-btn');
+  var errMsg = document.getElementById('error-msg');
+
+  if (!email || !email.includes('@')) {
+    errMsg.classList.add('visible');
+    return;
+  }
+  errMsg.classList.remove('visible');
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  var data = new FormData(e.target);
+
+  fetch(e.target.action, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(res) {
+    if (res.ok) {
+      document.getElementById('waitlist-form').style.display = 'none';
+      var success = document.getElementById('success-msg');
+      success.classList.add('visible');
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Notify me first';
+      errMsg.textContent = 'Something went wrong. Please try again.';
+      errMsg.classList.add('visible');
+    }
+  }).catch(function() {
+    btn.disabled = false;
+    btn.textContent = 'Notify me first';
+    errMsg.textContent = 'Network error. Please try again.';
+    errMsg.classList.add('visible');
+  });
+}
+</script>
+
+</body>
+</html>

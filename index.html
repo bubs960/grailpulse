@@ -394,10 +394,17 @@ body::after {
     2. Copy your Form ID and replace YOUR_FORMSPREE_ID below
     3. The "categories" hidden field sends selected categories automatically
   -->
-  <form
-    id="waitlist-form"
-    action="https://api.web3forms.com/submit"
-<input type="hidden" name="access_key" value="c1090cd2-5a19-40b7-bd37-a2920a940358">
+ <form
+  id="waitlist-form"
+  action="https://api.web3forms.com/submit"
+  method="POST"
+  class="form-wrap fade-in d5"
+  onsubmit="handleSubmit(event)">
+
+  <input type="hidden" name="access_key" value="c1090cd2-5a19-40b7-bd37-a2920a940358">
+  <input type="hidden" name="categories" id="categories-field" value="none selected">
+  <input type="hidden" name="_subject" value="New GrailPulse waitlist signup">
+  <input type="hidden" name="_next" value="">
    
  method="POST"
     class="form-wrap fade-in d5"

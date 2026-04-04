@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrailPulse — Drop Intelligence for Serious Collectors</title>
+<meta name="description" content="Know what's dropping before it sells out. Pre-order alerts across action figures, Barbie, Hot Toys, Hot Wheels, and designer toys.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08090B;
+    --surface: #0F1115;
+    --surface-2: #161A20;
+    --border: #1E2330;
+    --border-light: #262D3A;
+    --gold: #C9973A;
+    --gold-dim: #8A6420;
+    --gold-glow: rgba(201,151,58,0.12);
+    --text: #EDE8DF;
+    --text-2: #9A9590;
+    --text-3: #545054;
+    --dropping: #E8622A;
+    --preorder: #4A87C8;
+    --instock: #4AB876;
+    --soldout: #444;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8,9,11,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+  .logo-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .logo-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+    flex-shrink: 0;
+    align-self: center;
+    margin-left: 2px;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .nav-badge {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--gold-dim);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 7vw, 72px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text-2);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* EMAIL CAPTURE */
+  .capture-wrap {
+    display: flex;
+    gap: 0;
+    max-width: 440px;
+    margin: 0 auto 1rem;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .capture-wrap:focus-within {
+    border-color: var(--gold-dim);
+  }
+  .capture-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--text);
+  }
+  .capture-input::placeholder { color: var(--text-3); }
+  .capture-btn {
+    background: var(--gold);
+    color: #0A0B0D;
+    border: none;
+    padding: 12px 20px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+    transition: background 0.15s;
+  }
+  .capture-btn:hover { background: #DBA840; }
+
+  .capture-note {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-bottom: 3rem;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    background: var(--surface);
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* MAIN CONTENT */
+  .main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 4rem;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .section-live {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--instock);
+    letter-spacing: 0.06em;
+  }
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--instock);
+    border-radius: 50%;
+    animation: pulse-dot 1.5s ease-in-out infinite;
+  }
+
+  /* CATEGORY FILTERS */
+  .filters {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .filter-btn:hover {
+    border-color: var(--border-light);
+    color: var(--text);
+  }
+  .filter-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #0A0B0D;
+  }
+
+  /* DROP GRID */
+  .drop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* DROP CARD */
+  .drop-card {
+    background: var(--surface);
+    padding: 1.25rem;
+    transition: background 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .drop-card:hover { background: var(--surface-2); }
+  .drop-card.hidden { display: none; }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .card-badges {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  .badge-cat-figures { background: rgba(74,135,200,0.15); color: #6AA8D8; }
+  .badge-cat-barbie { background: rgba(210,80,130,0.15); color: #E07AAA; }
+  .badge-cat-hottoys { background: rgba(201,151,58,0.15); color: #C9973A; }
+  .badge-cat-hotwheels { background: rgba(232,98,42,0.15); color: #E8622A; }
+  .badge-cat-designertoys { background: rgba(74,184,118,0.15); color: #4AB876; }
+
+  .status-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .status-dropping { background: rgba(232,98,42,0.2); color: var(--dropping); border: 1px solid rgba(232,98,42,0.3); }
+  .status-preorder { background: rgba(74,135,200,0.15); color: var(--preorder); }
+  .status-instock { background: rgba(74,184,118,0.15); color: var(--instock); }
+  .status-soldout { background: rgba(68,68,68,0.3); color: var(--soldout); }
+
+  .card-product {
+    flex: 1;
+  }
+  .card-brand {
+    font-size: 11px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 3px;
+  }
+  .card-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .card-line {
+    font-size: 12px;
+    color: var(--text-2);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .card-date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-3);
+  }
+  .card-date span {
+    color: var(--text-2);
+  }
+  .card-price {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .card-bottom {
+    display: flex;
+    gap: 8px;
+  }
+  .btn-primary {
+    flex: 1;
+    background: var(--gold);
+    color: #0A0B0D;
+    border: none;
+    padding: 9px 14px;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    letter-spacing: 0.03em;
+    transition: background 0.15s;
+  }
+  .btn-primary:hover { background: #DBA840; }
+  .btn-primary.soldout {
+    background: var(--surface-2);
+    color: var(--text-3);
+    cursor: default;
+    border: 1px solid var(--border);
+  }
+  .btn-alert {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--text-2);
+    padding: 9px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .btn-alert:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-3);
+    font-size: 14px;
+    display: none;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-left {
+    font-size: 12px;
+    color: var(--text-3);
+    line-height: 1.6;
+  }
+  .footer-left a { color: var(--text-2); text-decoration: none; }
+  .footer-left a:hover { color: var(--gold); }
+  .footer-disclosure {
+    font-size: 11px;
+    color: var(--text-3);
+    max-width: 400px;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--surface-2);
+    border: 1px solid var(--gold-dim);
+    border-radius: 6px;
+    padding: 12px 18px;
+    font-size: 13px;
+    color: var(--text);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 200;
+  }
+  .toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+    .main { padding: 1.5rem 1.25rem 3rem; }
+    .stats-bar { gap: 1.5rem; padding: 1rem 1.25rem; }
+    nav { padding: 0 1.25rem; }
+    .drop-grid { grid-template-columns: 1fr; }
+    .footer-disclosure { text-align: left; }
+    footer { padding: 1.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">
+    <span class="logo-name">GrailPulse</span>
+    <span class="logo-dot"></span>
+  </a>
+  <div class="nav-right">
+    <span class="nav-badge">Beta</span>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Drop Intelligence</div>
+  <h1 class="hero-title">Never miss<br><em>your grail</em> again.</h1>
+  <p class="hero-sub">Pre-order alerts across action figures, Barbie, Hot Toys, Hot Wheels, and designer toys — before they sell out.</p>
+
+  <form class="capture-wrap" onsubmit="handleSignup(event)">
+    <input type="email" class="capture-input" placeholder="your@email.com" id="email-input" required>
+    <button type="submit" class="capture-btn">Get Drop Alerts</button>
+  </form>
+  <p class="capture-note">Free. No spam. Unsubscribe anytime.</p>
+</section>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Categories</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">15+</div>
+    <div class="stat-label">Retailers Monitored</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">Daily</div>
+    <div class="stat-label">Scout Updates</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">$0</div>
+    <div class="stat-label">Always Free</div>
+  </div>
+</div>
+
+<main class="main">
+  <div class="section-header">
+    <h2 class="section-title">Upcoming Drops</h2>
+    <div class="section-live">
+      <span class="live-dot"></span>
+      Updated daily
+    </div>
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="filter-btn active" data-cat="all" onclick="filterDrops('all', this)">All</button>
+    <button class="filter-btn" data-cat="figures" onclick="filterDrops('figures', this)">Action Figures</button>
+    <button class="filter-btn" data-cat="barbie" onclick="filterDrops('barbie', this)">Barbie</button>
+    <button class="filter-btn" data-cat="hottoys" onclick="filterDrops('hottoys', this)">Hot Toys</button>
+    <button class="filter-btn" data-cat="hotwheels" onclick="filterDrops('hotwheels', this)">Hot Wheels</button>
+    <button class="filter-btn" data-cat="designertoys" onclick="filterDrops('designertoys', this)">Designer Toys</button>
+  </div>
+
+  <div class="drop-grid" id="drop-grid"></div>
+  <div class="empty-state" id="empty-state">No drops found in this category right now. Check back soon.</div>
+</main>
+
+<footer>
+  <div class="footer-left">
+    &copy; 2026 GrailPulse &mdash; Powered by <a href="#">Bubs960 Collectibles</a><br>
+    <a href="#">Privacy Policy</a> &middot; <a href="#">Alert Preferences</a> &middot; <a href="#">Contact</a>
+  </div>
+  <div class="footer-disclosure">
+    GrailPulse earns a commission on purchases made through links on this site. This helps keep the scout free.
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ─── Affiliate engine ─────────────────────────────────── */
+const AFFILIATE = {
+  ebay:          'campid=5339147406&mkevt=1&mkcid=1&mkrid=711-53200-19255-0&toolid=10001&customid=grailpulse',
+  ee:            'id=GRAILPULSE',
+  bbts:          'ref=grailpulse',
+  sideshow:      'utm_source=grailpulse&utm_medium=scout',
+  amazon:        'tag=grailpulse-20',
+  mattelcreations:'utm_source=grailpulse',
+};
+
+function affLink(url, type) {
+  if (!url || url === '#') return '#';
+  const sep = url.includes('?') ? '&' : '?';
+  return url + sep + (AFFILIATE[type] || '');
+}
+
+/* ─── Labels ───────────────────────────────────────────── */
+const catLabels = {
+  figures:     'Action Figures',
+  barbie:      'Barbie',
+  hottoys:     'Hot Toys',
+  hotwheels:   'Hot Wheels',
+  designertoys:'Designer Toys'
+};
+
+const statusLabels = {
+  dropping: '<span class="status-badge status-dropping">&#9632; Dropping Now</span>',
+  preorder: '<span class="status-badge status-preorder">Pre-Order</span>',
+  instock:  '<span class="status-badge status-instock">In Stock</span>',
+  soldout:  '<span class="status-badge status-soldout">Sold Out</span>'
+};
+
+/* ─── State ────────────────────────────────────────────── */
+var allDrops       = [];
+var activeFilter   = 'all';
+
+/* ─── Render ───────────────────────────────────────────── */
+function renderCards(data) {
+  var grid  = document.getElementById('drop-grid');
+  var empty = document.getElementById('empty-state');
+  if (!data.length) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  grid.innerHTML = data.map(function(d) {
+    var isSoldOut = d.status === 'soldout';
+    var btnText   = isSoldOut ? 'Sold Out' : d.status === 'preorder' ? 'Pre-Order Now ↗' : 'View Drop ↗';
+    var link      = isSoldOut ? '#' : affLink(d.url, d.aff);
+    var cat       = catLabels[d.cat] || d.cat;
+    var status    = statusLabels[d.status] || '';
+    var notePart  = d.note ? ' &mdash; <span style="color:var(--text-3)">' + d.note + '</span>' : '';
+    return [
+      '<div class="drop-card" data-cat="' + d.cat + '">',
+        '<div class="card-top">',
+          '<div class="card-badges">',
+            '<span class="badge badge-cat-' + d.cat + '">' + cat + '</span>',
+          '</div>',
+          status,
+        '</div>',
+        '<div class="card-product">',
+          '<div class="card-brand">' + d.brand + '</div>',
+          '<div class="card-name">' + d.name + '</div>',
+          '<div class="card-line">' + d.line + notePart + '</div>',
+        '</div>',
+        '<div class="card-meta">',
+          '<div class="card-date">Drop: <span>' + d.date + '</span></div>',
+          '<div class="card-price">' + d.price + '</div>',
+        '</div>',
+        '<div class="card-bottom">',
+          isSoldOut
+            ? '<span class="btn-primary soldout">Sold Out</span>'
+            : '<a href="' + link + '" target="_blank" rel="noopener" class="btn-primary">' + btnText + '</a>',
+          '<button class="btn-alert" onclick="alertDrop(\'' + d.name.replace(/'/g, "\\'") + '\')">&#9776; Alert</button>',
+        '</div>',
+      '</div>'
+    ].join('');
+  }).join('');
+}
+
+/* ─── Skeleton loader ──────────────────────────────────── */
+function showSkeleton() {
+  var grid = document.getElementById('drop-grid');
+  var skeletonCard = [
+    '<div class="drop-card" style="opacity:0.35;">',
+      '<div class="card-top"><div style="width:90px;height:18px;background:var(--border-light);border-radius:4px;"></div></div>',
+      '<div class="card-product" style="margin-top:10px;">',
+        '<div style="width:50%;height:12px;background:var(--border-light);border-radius:4px;margin-bottom:8px;"></div>',
+        '<div style="width:80%;height:18px;background:var(--border-light);border-radius:4px;margin-bottom:6px;"></div>',
+        '<div style="width:60%;height:12px;background:var(--border);border-radius:4px;"></div>',
+      '</div>',
+      '<div class="card-meta" style="margin-top:12px;">',
+        '<div style="width:80px;height:12px;background:var(--border);border-radius:4px;"></div>',
+        '<div style="width:50px;height:12px;background:var(--border);border-radius:4px;"></div>',
+      '</div>',
+      '<div class="card-bottom" style="margin-top:12px;">',
+        '<div style="flex:1;height:36px;background:var(--border-light);border-radius:4px;"></div>',
+      '</div>',
+    '</div>'
+  ].join('');
+  grid.innerHTML = skeletonCard.repeat(6);
+}
+
+/* ─── Filter ───────────────────────────────────────────── */
+function filterDrops(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var filtered = cat === 'all' ? allDrops : allDrops.filter(function(d) { return d.cat === cat; });
+  renderCards(filtered);
+}
+
+/* ─── Toast ────────────────────────────────────────────── */
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 3500);
+}
+
+function alertDrop(name) {
+  showToast('Alert set for: ' + name);
+}
+
+/* ─── Signup ───────────────────────────────────────────── */
+function handleSignup(e) {
+  e.preventDefault();
+  var email = document.getElementById('email-input').value;
+  if (email) {
+    showToast("You're on the list. Drop alerts coming your way.");
+    document.getElementById('email-input').value = '';
+  }
+}
+
+/* ─── Update timestamp ─────────────────────────────────── */
+function setUpdatedTime(isoString) {
+  var el = document.querySelector('.section-live');
+  if (!el || !isoString) return;
+  try {
+    var d   = new Date(isoString);
+    var now = new Date();
+    var diffH = Math.round((now - d) / 36e5);
+    var label = diffH < 1 ? 'Just updated'
+              : diffH < 24 ? 'Updated ' + diffH + 'h ago'
+              : 'Updated ' + Math.round(diffH / 24) + 'd ago';
+    el.innerHTML = '<span class="live-dot"></span>' + label;
+  } catch(e) {}
+}
+
+/* ─── Update drop count stat ───────────────────────────── */
+function setDropCount(n) {
+  var els = document.querySelectorAll('.stat-num');
+  els.forEach(function(el) {
+    if (el.textContent === '15+' || /^\d+$/.test(el.textContent)) {
+      el.textContent = n + '+';
+    }
+  });
+}
+
+/* ─── Main: fetch drops.json, fall back to seed ────────── */
+(function init() {
+  showSkeleton();
+
+  fetch('/drops.json?v=' + Date.now())
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(data) {
+      /* drops.json from updater: { version, updated, count, drops: [...] } */
+      var drops = Array.isArray(data) ? data : (data.drops || []);
+      if (!drops.length) throw new Error('Empty drops');
+      allDrops = drops;
+      setUpdatedTime(data.updated || null);
+      setDropCount(drops.length);
+      renderCards(allDrops);
+    })
+    .catch(function(err) {
+      console.warn('[GrailPulse] drops.json fetch failed (' + err.message + ') — using seed data');
+      allDrops = SEED_DROPS;
+      renderCards(allDrops);
+    });
+})();
+
+/* ─── Seed data: always-available fallback ─────────────── */
+var SEED_DROPS = [
+  { id:1, cat:'figures',     brand:'Hasbro',         line:"Marvel Legends Series",          name:"X-Men '97 Wave",                      status:'preorder', date:'Q2 2026',               price:'$24.99 each',              retailer:'Entertainment Earth',   url:'https://www.entertainmentearth.com/s/marvel-legends-x-men-97',                        aff:'ee',            note:'Cyclops, Storm, Gambit & Wolverine' },
+  { id:2, cat:'figures',     brand:'Mattel',          line:'WWE Elite Collection',            name:'Series 110',                          status:'dropping', date:'Arriving Now',          price:'$22.99',                   retailer:'Amazon',                url:'https://www.amazon.com/s?k=WWE+Elite+Series+110',                                      aff:'amazon',        note:'New wave hitting Target & Walmart pegs' },
+  { id:3, cat:'figures',     brand:'Hasbro',          line:'Star Wars Black Series',          name:'The Mandalorian Wave',                status:'preorder', date:'Q3 2026',               price:'$27.99',                   retailer:'BigBadToyStore',         url:'https://www.bigbadtoystore.com/Search?Company=7&SearchText=black+series+mandalorian', aff:'bbts',          note:'Din Djarin, Grogu & supporting cast' },
+  { id:4, cat:'figures',     brand:'NECA',            line:'Ultimate Series',                 name:'TMNT 2-Pack Wave',                    status:'preorder', date:'Q2–Q3 2026',            price:'$39.99',                   retailer:'BigBadToyStore',         url:'https://www.bigbadtoystore.com/Search?Company=102&SearchText=neca+tmnt',               aff:'bbts',          note:'NECA TMNT are consistently grail-tier' },
+  { id:5, cat:'hottoys',     brand:'Hot Toys',        line:'Movie Masterpiece Series',        name:'Superman (2025 Film)',                status:'preorder', date:'Q3–Q4 2026',            price:'$280–$340',                retailer:'Sideshow Collectibles',  url:'https://www.sideshow.com/collectibles/hot-toys',                                       aff:'sideshow',      note:'1/6 scale — James Gunn film' },
+  { id:6, cat:'hottoys',     brand:'Hot Toys',        line:'Movie Masterpiece DX Series',     name:'Wolverine (Deadpool & Wolverine)',    status:'instock',  date:'In Stock Now',          price:'$370',                     retailer:'Sideshow Collectibles',  url:'https://www.sideshow.com/collectibles/hot-toys',                                       aff:'sideshow',      note:'DX edition — selling fast' },
+  { id:7, cat:'hottoys',     brand:'Hot Toys',        line:'Movie Masterpiece Series',        name:'Iron Man Mark LXXXV',                status:'soldout',  date:'Sold Out',              price:'$310 retail → $450+ secondary', retailer:'Check eBay',         url:'https://www.ebay.com/sch/i.html?_nkw=hot+toys+iron+man+mark+85',                      aff:'ebay',          note:'No re-release — secondary market only' },
+  { id:8, cat:'hotwheels',   brand:'Mattel',          line:'Hot Wheels Mainline',             name:'2026 Super Treasure Hunts',           status:'dropping', date:'Cases Arriving Monthly',price:'$1.29 retail → $25–$300',  retailer:'Target / Walmart',       url:'https://www.amazon.com/s?k=hot+wheels+2026+treasure+hunt',                            aff:'amazon',        note:'1 STH per 72-car case. Spectraflame + Real Riders = identifier' },
+  { id:9, cat:'hotwheels',   brand:'Mattel',          line:'Red Line Club Exclusive',         name:'RLC 2026 Members Set',                status:'preorder', date:'Watch Mattel Creations',price:'$250 full set',            retailer:'Mattel Creations',       url:'https://creations.mattel.com/pages/hot-wheels-rlc',                                    aff:'mattelcreations',note:'Requires RLC membership. Secondary: $400–$800' },
+  { id:10,cat:'hotwheels',   brand:'Mattel',          line:'Car Culture Series',              name:'Japan Historic Vol. 4',               status:'preorder', date:'Q2 2026',               price:'$5.99 each',               retailer:'BigBadToyStore',         url:'https://www.bigbadtoystore.com/Search?Company=7&SearchText=car+culture+japan',        aff:'bbts',          note:'JDM sets hold value well' },
+  { id:11,cat:'designertoys',brand:'Pop Mart',        line:'Labubu The Monsters',             name:'New Colorway Drop',                   status:'dropping', date:'Monitor Pop Mart app',  price:'$20–$28 blind box',        retailer:'Pop Mart',               url:'https://www.popmart.com/us/pages/labubu',                                              aff:'amazon',        note:'eBay searches up 2,600% YoY. Sells out in minutes.' },
+  { id:12,cat:'designertoys',brand:'Medicom',         line:'Bearbrick',                       name:'1000% Designer Collab',               status:'preorder', date:'TBA 2026',              price:'$800–$1,500',              retailer:'Entertainment Earth',    url:'https://www.entertainmentearth.com/s/bearbrick',                                       aff:'ee',            note:'Collabs with artists hold highest secondary value' },
+];
+</script>
+</body>
+</html>

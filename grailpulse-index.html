@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrailPulse — Action Figure Price Guide</title>
+<meta name="description" content="Instantly check what any action figure is worth. 18,931 figures across 17 genres. Free price intelligence for collectors.">
+<link rel="canonical" href="https://grailpulse.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06080e;--surface:#0e1118;--surface2:#161b26;--border:#1c2233;
+  --gold:#d4a520;--gold-dim:rgba(212,165,32,0.12);
+  --green:#2dd4a0;--blue:#5ba0f5;--red:#ef5555;
+  --text:#e4e2dd;--text2:#a8a4a0;--dim:#5a5e6e;
+  --mono:'DM Mono',monospace;--sans:'Instrument Sans',system-ui,sans-serif;
+  --radius:10px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased}
+header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(6,8,14,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:50}
+.logo{display:flex;align-items:center;gap:8px}
+.logo-icon{width:28px;height:28px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:700;color:var(--bg)}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--text);letter-spacing:-0.02em}
+.logo-text span{color:var(--gold)}
+.ext-link{font-size:0.68rem;padding:6px 12px;background:var(--gold-dim);border:1px solid rgba(212,165,32,0.25);border-radius:6px;color:var(--gold);text-decoration:none;font-weight:600;white-space:nowrap}
+.hero{padding:40px 20px 20px;text-align:center;max-width:600px;margin:0 auto}
+.hero h1{font-size:clamp(1.4rem,5vw,2rem);font-weight:700;line-height:1.2;margin-bottom:8px;letter-spacing:-0.03em}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{color:var(--text2);font-size:0.85rem;margin-bottom:24px}
+.hero .stats{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.hero .stat{font-family:var(--mono);font-size:0.72rem;color:var(--dim);background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:20px}
+.hero .stat b{color:var(--gold)}
+.search-wrap{max-width:560px;margin:0 auto;padding:0 20px 20px;position:relative}
+.search-input{width:100%;padding:14px 18px 14px 44px;font-size:1rem;font-weight:600;font-family:var(--sans);background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);color:var(--text);outline:none;transition:border-color 0.15s}
+.search-input:focus{border-color:var(--gold)}
+.search-input::placeholder{color:var(--dim);font-weight:400}
+.search-icon{position:absolute;left:34px;top:50%;transform:translateY(-50%);color:var(--dim);font-size:1.1rem;pointer-events:none}
+.search-spinner{display:none;position:absolute;right:34px;top:50%;transform:translateY(-50%);width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.6s linear infinite}
+@keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
+.results{max-width:600px;margin:0 auto;padding:0 20px 40px}
+.result-count{font-size:0.68rem;color:var(--dim);font-family:var(--mono);margin-bottom:8px;padding-left:2px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;transition:border-color 0.12s}
+.card:hover{border-color:rgba(212,165,32,0.2)}
+.card-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.card-emoji{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.card-info{flex:1;min-width:0}
+.card-name{font-weight:700;font-size:0.9rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-meta{font-size:0.68rem;color:var(--dim);display:flex;gap:6px;align-items:center;margin-top:2px}
+.card-line{color:var(--blue);font-weight:600}
+.card-price{text-align:right;flex-shrink:0;min-width:65px}
+.card-price-val{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--gold)}
+.card-price-fs{font-family:var(--mono);font-size:0.9rem;font-weight:600;color:var(--text2)}
+.card-price-src{font-size:0.52rem;color:var(--dim);font-family:var(--mono);margin-top:1px}
+.card-price-loading{color:var(--dim);font-size:0.7rem;animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:1}}
+.card-actions{display:flex;gap:6px;padding-top:6px;border-top:1px solid var(--border)}
+.card-actions a{font-size:0.65rem;padding:4px 10px;border-radius:5px;text-decoration:none;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.1s}
+.act-buy{background:rgba(91,160,245,0.08);border:1px solid rgba(91,160,245,0.2);color:var(--blue)}
+.act-sold{background:var(--surface2);border:1px solid var(--border);color:var(--text2)}
+.act-ext{background:var(--gold-dim);border:1px solid rgba(212,165,32,0.2);color:var(--gold)}
+.empty{text-align:center;padding:60px 20px;color:var(--dim);font-size:0.85rem}
+.empty .big{font-size:2rem;margin-bottom:8px}
+.genres{max-width:600px;margin:0 auto;padding:0 20px 40px}
+.genres h2{font-size:0.78rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-weight:600}
+.genre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+.genre-pill{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer;transition:all 0.12s;font-size:0.72rem;font-weight:600;color:var(--text2)}
+.genre-pill:hover{border-color:var(--gold);color:var(--gold)}
+.genre-pill .icon{font-size:1.2rem;display:block;margin-bottom:4px}
+footer{border-top:1px solid var(--border);padding:20px;text-align:center;font-size:0.62rem;color:var(--dim);font-family:var(--mono)}
+footer a{color:var(--text2);text-decoration:none}
+@media(max-width:480px){.hero{padding:24px 16px 12px}.hero h1{font-size:1.3rem}.search-wrap{padding:0 16px 16px}.results{padding:0 16px 30px}.genres{padding:0 16px 30px}.card{padding:12px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><div class="logo-icon">GP</div><div class="logo-text">Grail<span>Pulse</span></div></div>
+  <a href="https://chrome.google.com/webstore/detail/figurepinner/fcdlophbjocbaemkgelidbbhpkfaikfi" class="ext-link" target="_blank">Get Chrome Extension</a>
+</header>
+<div class="hero">
+  <h1>What's your <em>figure</em> worth?</h1>
+  <p>Instant price intelligence backed by 105,000+ eBay listings. Search 18,931 figures across 17 genres.</p>
+  <div class="stats">
+    <span class="stat"><b>105K+</b> listings tracked</span>
+    <span class="stat"><b>17</b> genres</span>
+    <span class="stat"><b>40K+</b> sold comps</span>
+  </div>
+</div>
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input class="search-input" id="search" type="text" placeholder="Darth Vader, Wolverine, Ric Flair..." autocomplete="off" autofocus>
+  <div class="search-spinner" id="spinner"></div>
+</div>
+<div class="results" id="results"><div class="empty" id="empty-state"><div class="big">⚡</div>Type any figure name to see what it's worth</div></div>
+<div class="genres" id="genre-section">
+  <h2>Browse by genre</h2>
+  <div class="genre-grid" id="genre-grid"></div>
+</div>
+<footer>
+  <p>GrailPulse &middot; Powered by <a href="https://figurepinner.com" target="_blank">FigurePinner</a> &middot; <a href="https://figurepinner.com/privacy.html" target="_blank">Privacy</a></p>
+  <p style="margin-top:4px">Prices from eBay sold data (confidence &ge; 85%) &middot; &copy; 2026 Bubs960 Collectibles</p>
+</footer>
+<script>
+var API = 'https://figurepinner-api.bubs960.workers.dev';
+var EPN = '5339147406';
+var GENRES = [
+  {name:'Wrestling',icon:'🤼',q:'WWE Elite'},{name:'Star Wars',icon:'⭐',q:'Star Wars Black Series'},
+  {name:'Marvel',icon:'🦸',q:'Marvel Legends'},{name:'DC',icon:'🦇',q:'DC Multiverse'},
+  {name:'Transformers',icon:'🤖',q:'Transformers'},{name:'G.I. Joe',icon:'🎖️',q:'GI Joe Classified'},
+  {name:'MOTU',icon:'⚔️',q:'Masters Universe Origins'},{name:'TMNT',icon:'🐢',q:'TMNT Playmates'},
+  {name:'NECA',icon:'🎃',q:'NECA figure'},{name:'Spawn',icon:'💀',q:'Spawn McFarlane'},
+  {name:'Power Rangers',icon:'⚡',q:'Power Rangers Lightning'},{name:'Ghostbusters',icon:'👻',q:'Ghostbusters Hasbro'},
+  {name:'Thundercats',icon:'🐱',q:'Thundercats Super7'},{name:'Indiana Jones',icon:'🎩',q:'Indiana Jones Hasbro'},
+  {name:'Mythic Legions',icon:'🛡️',q:'Mythic Legions'},{name:'D&D',icon:'🐉',q:'Dungeons Dragons'},
+  {name:'Action Force',icon:'💥',q:'Action Force Valaverse'}
+];
+var ICONS = {wrestling:'🤼',starwars:'⭐',marvel:'🦸',dc:'🦇',transformers:'🤖',gijoe:'🎖️',motu:'⚔️',tmnt:'🐢',neca:'🎃',spawn:'💀',powerrangers:'⚡',ghostbusters:'👻',thundercats:'🐱',indianajones:'🎩',mythiclegions:'🛡️',dd:'🐉',actionforce:'💥'};
+
+var gGrid = document.getElementById('genre-grid');
+GENRES.forEach(function(g) {
+  var pill = document.createElement('div');
+  pill.className = 'genre-pill';
+  pill.innerHTML = '<span class="icon">' + g.icon + '</span>' + g.name;
+  pill.onclick = function() { document.getElementById('search').value = g.q; doSearch(g.q); };
+  gGrid.appendChild(pill);
+});
+
+var _debounce;
+var input = document.getElementById('search');
+input.addEventListener('input', function() {
+  clearTimeout(_debounce);
+  _debounce = setTimeout(function() { doSearch(input.value); }, 300);
+});
+
+async function doSearch(q) {
+  q = (q || '').trim();
+  var results = document.getElementById('results');
+  var spinner = document.getElementById('spinner');
+  var empty = document.getElementById('empty-state');
+  var genreSection = document.getElementById('genre-section');
+  if (q.length < 2) { results.innerHTML = ''; results.appendChild(empty); empty.style.display = ''; genreSection.style.display = ''; return; }
+  spinner.style.display = 'block';
+  genreSection.style.display = 'none';
+  try {
+    var resp = await fetch(API + '/api/v1/search?q=' + encodeURIComponent(q) + '&limit=20');
+    var data = await resp.json();
+    var figures = data.results || data.figures || [];
+    if (!figures.length) {
+      results.innerHTML = '<div class="empty"><div class="big">🔍</div>No figures found for "' + esc(q) + '"</div>';
+      spinner.style.display = 'none'; return;
+    }
+    results.innerHTML = '<div class="result-count">' + figures.length + ' result' + (figures.length > 1 ? 's' : '') + '</div>' + figures.map(function(f, i) { return renderCard(f, i); }).join('');
+    // Fetch live prices from D1 for each result
+    figures.forEach(function(f, i) {
+      var fid = (f.brand||'') + '|' + (f.line||'') + '|' + (f.series||'') + '|' + (f.name || f.wrestler || '');
+      if (f.brand && (f.name || f.wrestler)) fetchPrice(fid, i);
+    });
+  } catch(e) {
+    results.innerHTML = '<div class="empty"><div class="big">⚠️</div>Search unavailable</div>';
+  }
+  spinner.style.display = 'none';
+}
+
+async function fetchPrice(figureId, idx) {
+  var el = document.getElementById('price-' + idx);
+  if (!el) return;
+  try {
+    var resp = await fetch(API + '/api/v1/figure-price?figureId=' + encodeURIComponent(figureId));
+    var d = await resp.json();
+    if (d.avgSold) {
+      el.innerHTML = '<span class="card-price-val">$' + d.avgSold.toFixed(2) + '</span><span class="card-price-src">' + d.soldCount + ' sold</span>';
+    } else if (d.avgFS) {
+      el.innerHTML = '<span class="card-price-fs">~$' + d.avgFS.toFixed(2) + '</span><span class="card-price-src">' + d.fsCount + ' listed</span>';
+    } else {
+      el.innerHTML = '<span class="card-price-src">no data yet</span>';
+    }
+  } catch(e) { el.innerHTML = '<span class="card-price-src">—</span>'; }
+}
+
+function renderCard(f, index) {
+  var name = f.name || f.wrestler || '', line = f.line || '', brand = f.brand || '';
+  var series = f.series || '', year = f.year || '', genre = f.genre || '';
+  var icon = ICONS[genre] || '📦';
+  var ebayQ = encodeURIComponent(name + ' ' + line + ' ' + brand + ' action figure');
+  var buyUrl = 'https://www.ebay.com/sch/i.html?_nkw=' + ebayQ + '&_sop=15&LH_BIN=1&mkcid=1&mkrid=711-53200-19255-0&campid=' + EPN + '&toolid=10001';
+  var soldUrl = 'https://www.ebay.com/sch/i.html?_nkw=' + ebayQ + '&LH_Sold=1&LH_Complete=1&_sop=13&mkcid=1&mkrid=711-53200-19255-0&campid=' + EPN + '&toolid=10001';
+  return '<div class="card"><div class="card-top">' +
+    '<span class="card-emoji">' + icon + '</span>' +
+    '<div class="card-info"><div class="card-name">' + esc(name) + '</div>' +
+    '<div class="card-meta"><span class="card-line">' + esc(line) + '</span>' +
+    (series ? '<span>S' + esc(String(series)) + '</span>' : '') +
+    (year ? '<span>' + year + '</span>' : '') + '</div></div>' +
+    '<div class="card-price" id="price-' + index + '"><span class="card-price-loading">···</span></div>' +
+    '</div><div class="card-actions">' +
+    '<a href="' + buyUrl + '" target="_blank" rel="noopener" class="act-buy">🛒 Buy</a>' +
+    '<a href="' + soldUrl + '" target="_blank" rel="noopener" class="act-sold">📊 Sold</a>' +
+    '<a href="https://chrome.google.com/webstore/detail/figurepinner/fcdlophbjocbaemkgelidbbhpkfaikfi" target="_blank" class="act-ext">📌 Track</a>' +
+    '</div></div>';
+}
+function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+</script>
+</body>
+</html>

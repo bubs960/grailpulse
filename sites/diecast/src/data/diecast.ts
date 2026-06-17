@@ -56,6 +56,7 @@ export const DIECAST_PRICING_MODE = payload.meta.pricing_mode || 'seed'
 const PHOTO_PROXY_HOSTS = new Set([
   'i.ebayimg.com',
   'images.mercari.com',
+  'u-mercari-images.mercdn.net',
   'static.mercdn.net',
 ])
 

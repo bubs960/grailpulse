@@ -3,6 +3,7 @@ import type { EventContext } from '@cloudflare/workers-types'
 const ALLOWED_IMAGE_HOSTS = new Set([
   'i.ebayimg.com',
   'images.mercari.com',
+  'u-mercari-images.mercdn.net',
   'static.mercdn.net',
 ])
 

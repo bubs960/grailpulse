@@ -203,10 +203,9 @@ function photoQualityLabel(record: DiecastRecord): string {
 
 function photoSourceLabel(source?: string): string | null {
   const labels: Record<string, string> = {
-    'ebay-api': 'eBay API',
-    'ebay-scrape': 'eBay scrape',
-    'mercari-scrape': 'Mercari scrape',
-    'ebay-browse': 'eBay browse',
+    'ebay-api': 'eBay marketplace',
+    'mercari-marketplace': 'Mercari marketplace',
+    'ebay-browse': 'eBay marketplace',
     seed: 'Seeded photo',
     manual: 'Manual photo',
   }

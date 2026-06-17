@@ -1,0 +1,9 @@
+name = "grailpulse-diecast"
+compatibility_date = "2026-06-07"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "out"
+
+[[d1_databases]]
+binding = "USER_DB"
+database_name = "grailpulse-userdata"
+database_id = "983d4bbb-2d00-4aa5-b733-4741f53ed88e"

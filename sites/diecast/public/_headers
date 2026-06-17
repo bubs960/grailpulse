@@ -1,0 +1,17 @@
+/series/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/coin/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/browse/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/methodology/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/privacy/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sitemap.xml
+  Cache-Control: public, max-age=300, must-revalidate

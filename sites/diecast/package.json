@@ -1,0 +1,26 @@
+{
+  "name": "grailpulse-diecast",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:cf": "next build",
+    "deploy:prep": "node scripts/prune-static-export-rsc.mjs",
+    "traffic:pulse": "node ../grailpinner-site/scripts/grailpulse-traffic-pulse.mjs",
+    "start": "next start",
+    "test": "node scripts/validate-kb-health.mjs && node scripts/smoke-test.mjs"
+  },
+  "dependencies": {
+    "next": "^15.5.15",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260605.1",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}

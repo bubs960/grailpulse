@@ -24,7 +24,6 @@ export interface DiecastRecord {
   pricing_quality?: string
   verify_status?: string
   updated_at?: string
-  seed_source?: string
   title?: string
   photo_url?: string
   photo_source?: string

@@ -1,12 +1,10 @@
 # GrailPulse Die Cast Backup
 
-Snapshot source: `C:\Users\bubs9\diecast-site`
-
-Captured as a source backup for the GrailPulse Die Cast vertical after the KB expansion sync.
+Captured as a repository backup for the GrailPulse Die Cast vertical after the KB expansion sync.
 
 ## Contents
 
-- Next.js app source in `src/`
+- Next.js app code in `src/`
 - Cloudflare Pages Functions in `functions/`
 - operational scripts in `scripts/`
 - project docs in `docs/`

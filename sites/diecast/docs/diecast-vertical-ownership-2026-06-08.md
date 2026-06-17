@@ -1,6 +1,6 @@
 # Diecast Vertical Ownership - 2026-06-08
 
-Codex owns the Diecast vertical direction for GrailPulse as its own collector product, not as a CoinSpinner skin.
+Die Cast is a GrailPulse collector vertical with its own product direction.
 
 ## North Star
 
@@ -24,7 +24,7 @@ The core promise:
 - Live domain: https://diecast.grailpulse.com
 - Current live site: MVP data surface with homepage, browse, family pages, and variant/detail pages
 - Current deployed app dataset: 11,724 records, 126 families, 11,724 priced records, 50 photo families
-- The 2026-06-16 sync moved the larger generated source KB into the app and added a health validator for 10%+ growth, stable identity fields, required field completeness, duplicate IDs, and condition-pricing coverage
+- The 2026-06-16 expansion added a health validator for 10%+ growth, stable identity fields, required field completeness, duplicate IDs, and condition-pricing coverage
 - Photo handling now uses `/photo?src=...` so eBay/Mercari images are cached through Cloudflare instead of raw hotlinks
 - Cloudflare cache rules are live for `diecast.grailpulse.com`
 - License Locker MVP is live: `/license` issues a collector license plus garage key, `/garage` shows cloud-synced garage state, and detail pages can park cars or add hunt-list targets
@@ -95,7 +95,7 @@ The KB should keep grouping by family because per-variant pages can get massive.
 ## Quality Rules
 
 - Keep Diecast collector-literate, not generic toy-copy.
-- Avoid fake rarity claims unless backed by source/comps.
+- Avoid fake rarity claims unless backed by trusted references/comps.
 - Always distinguish exact variant photos from family/reference photos.
 - Keep family-first navigation.
 - Do not let gamification obscure practical utility.

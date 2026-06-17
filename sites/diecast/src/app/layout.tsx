@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p>2026 GrailPulse · Die Cast Pit Lane</p>
             <div style={{ display: 'flex', gap: 20 }}>
               <a href="https://grailpulse.com" target="_blank" rel="noopener noreferrer">GrailPulse</a>
-              <a href="https://coins.grailpulse.com" target="_blank" rel="noopener noreferrer">CoinSpinner</a>
+              <a href="https://grailpulse.com" target="_blank" rel="noopener noreferrer">GrailPulse Home</a>
               <a href="/garage/">My Garage</a>
               <a href="/methodology/">Methodology</a>
               <a href="/privacy/">Privacy</a>

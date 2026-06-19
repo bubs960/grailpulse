@@ -1,0 +1,750 @@
+{
+  "meta": {
+    "name": "GrailPulse Die Cast Source Catalog",
+    "version": "0.1.0",
+    "pricing_mode": "seed",
+    "notes": "Small test KB for validating diecast variation identity before broad catalog expansion."
+  },
+  "records": [
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Mainline",
+      "segment": "HW J-Imports",
+      "mix": "A",
+      "series_number": "001/250",
+      "casting": "Nissan Skyline GT-R R34",
+      "color": "metallic blue",
+      "deco": "white side stripe",
+      "wheel_type": "10SP",
+      "base": "plastic black",
+      "country": "Malaysia",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "R34 Skyline",
+        "Skyline GTR R34",
+        "Nissan Skyline R34"
+      ],
+      "condition_values": {
+        "loose": 3.5,
+        "mint_loose": 4.25,
+        "carded": 5.5,
+        "momc": 7,
+        "damaged_card": 4.5
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Mainline",
+      "segment": "HW J-Imports",
+      "mix": "B",
+      "series_number": "002/250",
+      "casting": "Nissan Skyline GT-R R34",
+      "color": "metallic blue",
+      "deco": "white side stripe",
+      "wheel_type": "10SP",
+      "base": "plastic black",
+      "country": "Malaysia",
+      "card_region": "UK",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "R34 Skyline UK card",
+        "Skyline GTR R34 UK",
+        "Nissan Skyline R34"
+      ],
+      "condition_values": {
+        "loose": 3.25,
+        "mint_loose": 4,
+        "carded": 5.75,
+        "momc": 7.5,
+        "damaged_card": 4.75
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Mainline",
+      "segment": "HW J-Imports",
+      "mix": "C",
+      "series_number": "003/250",
+      "casting": "Nissan Skyline GT-R R34",
+      "color": "red",
+      "deco": "black hood stripe",
+      "wheel_type": "10SP",
+      "base": "plastic black",
+      "country": "Malaysia",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Red R34 Skyline",
+        "Skyline GTR red",
+        "Nissan Skyline R34"
+      ],
+      "condition_values": {
+        "loose": 3.75,
+        "mint_loose": 4.5,
+        "carded": 6.25,
+        "momc": 7.75,
+        "damaged_card": 5
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Mainline",
+      "segment": "HW J-Imports",
+      "mix": "Q",
+      "series_number": "001/250",
+      "casting": "Nissan Skyline GT-R R34",
+      "color": "spectraflame blue",
+      "deco": "TH side mark",
+      "wheel_type": "Real Riders",
+      "base": "metal",
+      "country": "Malaysia",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "Super Treasure Hunt",
+      "aliases": [
+        "R34 Super Treasure Hunt",
+        "Skyline R34 STH",
+        "Nissan Skyline Super TH"
+      ],
+      "condition_values": {
+        "loose": 42,
+        "mint_loose": 55,
+        "carded": 74,
+        "momc": 92,
+        "damaged_card": 61
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Car Culture",
+      "segment": "Circuit Legends",
+      "mix": "1",
+      "series_number": "3/5",
+      "casting": "Porsche 911 GT3 RS",
+      "color": "white",
+      "deco": "Mobil 1 race livery",
+      "wheel_type": "Real Riders",
+      "base": "metal",
+      "country": "Thailand",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "911 GT3 RS",
+        "Porsche GT3 RS Car Culture"
+      ],
+      "condition_values": {
+        "loose": 7,
+        "mint_loose": 9,
+        "carded": 13,
+        "momc": 16,
+        "damaged_card": 10
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Premium Boulevard",
+      "segment": "Boulevard",
+      "mix": "A",
+      "series_number": "99",
+      "casting": "Mercedes-Benz 190E Evo II",
+      "color": "black",
+      "deco": "DTM inspired graphics",
+      "wheel_type": "Real Riders",
+      "base": "metal",
+      "country": "Thailand",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Mercedes 190E",
+        "190E Evo II",
+        "Benz 190E Boulevard"
+      ],
+      "condition_values": {
+        "loose": 8,
+        "mint_loose": 10,
+        "carded": 14,
+        "momc": 17,
+        "damaged_card": 11
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Premium Boulevard",
+      "segment": "Boulevard",
+      "mix": "B",
+      "series_number": "100",
+      "casting": "Mercedes-Benz 190E Evo II",
+      "color": "silver",
+      "deco": "DTM inspired graphics",
+      "wheel_type": "Real Riders",
+      "base": "metal",
+      "country": "Thailand",
+      "card_region": "UK",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Mercedes 190E UK",
+        "190E Evo II silver",
+        "Benz 190E Boulevard"
+      ],
+      "condition_values": {
+        "loose": 8.5,
+        "mint_loose": 10.5,
+        "carded": 14.5,
+        "momc": 17.5,
+        "damaged_card": 11.5
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Matchbox",
+      "year_release": 2025,
+      "line": "Basic",
+      "segment": "MBX Off Road",
+      "mix": "A",
+      "series_number": "12/100",
+      "casting": "Land Rover Defender 110",
+      "color": "orange",
+      "deco": "expedition side stripe",
+      "wheel_type": "6-spoke utility",
+      "base": "plastic black",
+      "country": "Thailand",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Defender 110",
+        "Land Rover 110"
+      ],
+      "condition_values": {
+        "loose": 2.25,
+        "mint_loose": 3,
+        "carded": 4.25,
+        "momc": 5.25,
+        "damaged_card": 3.5
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Matchbox",
+      "year_release": 2025,
+      "line": "Basic",
+      "segment": "MBX Off Road",
+      "mix": "B",
+      "series_number": "12/100",
+      "casting": "Land Rover Defender 110",
+      "color": "orange",
+      "deco": "expedition side stripe",
+      "wheel_type": "6-spoke utility",
+      "base": "plastic black",
+      "country": "Thailand",
+      "card_region": "UK",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Defender 110 UK",
+        "Land Rover 110 UK"
+      ],
+      "condition_values": {
+        "loose": 2.5,
+        "mint_loose": 3.25,
+        "carded": 4.5,
+        "momc": 5.5,
+        "damaged_card": 3.75
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Matchbox",
+      "year_release": 2025,
+      "line": "Moving Parts",
+      "segment": "Moving Parts",
+      "mix": "1",
+      "series_number": "4/50",
+      "casting": "Land Rover Defender 110",
+      "color": "olive green",
+      "deco": "plain utility",
+      "wheel_type": "realistic utility",
+      "base": "plastic black",
+      "country": "Thailand",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Defender Moving Parts",
+        "Land Rover 110 Moving Parts"
+      ],
+      "condition_values": {
+        "loose": 4.5,
+        "mint_loose": 5.75,
+        "carded": 7.5,
+        "momc": 9,
+        "damaged_card": 6
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Car Culture",
+      "segment": "Ronin Run",
+      "mix": "2",
+      "series_number": "2/5",
+      "casting": "Toyota Supra A80",
+      "color": "orange",
+      "deco": "black race livery",
+      "wheel_type": "Real Riders",
+      "base": "metal",
+      "country": "Thailand",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Supra A80",
+        "Toyota Supra",
+        "A80 Supra"
+      ],
+      "condition_values": {
+        "loose": 9,
+        "mint_loose": 11,
+        "carded": 16,
+        "momc": 20,
+        "damaged_card": 13
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Mainline",
+      "segment": "HW J-Imports",
+      "mix": "D",
+      "series_number": "004/250",
+      "casting": "Honda Civic Type R FL5",
+      "color": "white",
+      "deco": "red Honda side stripe",
+      "wheel_type": "10SP",
+      "base": "plastic black",
+      "country": "Malaysia",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Civic Type R",
+        "FL5 Civic",
+        "Honda FL5"
+      ],
+      "condition_values": {
+        "loose": 3.75,
+        "mint_loose": 4.75,
+        "carded": 6.75,
+        "momc": 8.5,
+        "damaged_card": 5.5
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Mainline",
+      "segment": "HW J-Imports",
+      "mix": "E",
+      "series_number": "005/250",
+      "casting": "Nissan Z",
+      "color": "yellow",
+      "deco": "black hood accent",
+      "wheel_type": "10SP",
+      "base": "plastic black",
+      "country": "Malaysia",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Fairlady Z",
+        "Nissan Z Proto",
+        "RZ34"
+      ],
+      "condition_values": {
+        "loose": 3.5,
+        "mint_loose": 4.5,
+        "carded": 6.5,
+        "momc": 8,
+        "damaged_card": 5.25
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Hot Wheels",
+      "year_release": 2025,
+      "line": "Car Culture",
+      "segment": "Circuit Legends",
+      "mix": "2",
+      "series_number": "4/5",
+      "casting": "Mazda RX-7 FD3S",
+      "color": "red",
+      "deco": "street tuner graphics",
+      "wheel_type": "Real Riders",
+      "base": "metal",
+      "country": "Thailand",
+      "card_region": "UK",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "RX-7 FD",
+        "Mazda RX7",
+        "FD3S"
+      ],
+      "condition_values": {
+        "loose": 8.5,
+        "mint_loose": 10,
+        "carded": 14.5,
+        "momc": 18,
+        "damaged_card": 11
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Matchbox",
+      "year_release": 2026,
+      "line": "The Movie",
+      "segment": "The Movie",
+      "mix": "A",
+      "series_number": "10/100",
+      "casting": "Volkswagen T2B Bus",
+      "color": "brilliant orange",
+      "deco": "movie deco",
+      "wheel_type": "basic black",
+      "base": "plastic black",
+      "country": "Thailand",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "VW T2B Bus",
+        "Volkswagen Bus",
+        "Matchbox movie bus"
+      ],
+      "condition_values": {
+        "loose": 4,
+        "mint_loose": 5,
+        "carded": 7,
+        "momc": 8.5,
+        "damaged_card": 6
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Matchbox",
+      "year_release": 2026,
+      "line": "Moving Parts",
+      "segment": "Moving Parts",
+      "mix": "2",
+      "series_number": "9/50",
+      "casting": "Ram 1500 Rebel",
+      "color": "white",
+      "deco": "off-road side stripe",
+      "wheel_type": "realistic utility",
+      "base": "plastic black",
+      "country": "Thailand",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Ram Rebel",
+        "Ram 1500",
+        "Matchbox Ram"
+      ],
+      "condition_values": {
+        "loose": 4.25,
+        "mint_loose": 5.25,
+        "carded": 7.25,
+        "momc": 9,
+        "damaged_card": 6.25
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Matchbox",
+      "year_release": 2026,
+      "line": "Moving Parts",
+      "segment": "Moving Parts",
+      "mix": "3",
+      "series_number": "14/50",
+      "casting": "Ford Bronco",
+      "color": "blue",
+      "deco": "trail stripes",
+      "wheel_type": "realistic utility",
+      "base": "plastic black",
+      "country": "Thailand",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "Bronco",
+        "Ford Bronco",
+        "Matchbox Bronco"
+      ],
+      "condition_values": {
+        "loose": 4.5,
+        "mint_loose": 5.5,
+        "carded": 7.5,
+        "momc": 9.25,
+        "damaged_card": 6.5
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Matchbox",
+      "year_release": 2026,
+      "line": "Moving Parts",
+      "segment": "Moving Parts",
+      "mix": "4",
+      "series_number": "22/50",
+      "casting": "Volkswagen ID. Buzz",
+      "color": "yellow",
+      "deco": "retro stripe",
+      "wheel_type": "realistic utility",
+      "base": "plastic black",
+      "country": "Thailand",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "ID Buzz",
+        "VW Buzz",
+        "Volkswagen Buzz"
+      ],
+      "condition_values": {
+        "loose": 4.75,
+        "mint_loose": 5.75,
+        "carded": 7.75,
+        "momc": 9.5,
+        "damaged_card": 6.75
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Jada Toys",
+      "year_release": 2005,
+      "line": "WWE",
+      "segment": "SmackDown",
+      "mix": "A",
+      "series_number": "1/6",
+      "casting": "Hummer H2",
+      "color": "black",
+      "deco": "WWE SmackDown graphics",
+      "wheel_type": "chrome",
+      "base": "metal",
+      "country": "China",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "WWE Hummer",
+        "SmackDown H2",
+        "Jada WWE H2"
+      ],
+      "condition_values": {
+        "loose": 12,
+        "mint_loose": 15,
+        "carded": 22,
+        "momc": 28,
+        "damaged_card": 18
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Jada Toys",
+      "year_release": 2005,
+      "line": "WWE",
+      "segment": "Raw",
+      "mix": "B",
+      "series_number": "2/6",
+      "casting": "Dodge Charger",
+      "color": "red",
+      "deco": "RAW logo side graphics",
+      "wheel_type": "chrome",
+      "base": "metal",
+      "country": "China",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "WWE Charger",
+        "RAW Charger",
+        "Jada WWE Charger"
+      ],
+      "condition_values": {
+        "loose": 11,
+        "mint_loose": 14,
+        "carded": 20,
+        "momc": 26,
+        "damaged_card": 16
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Jada Toys",
+      "year_release": 2005,
+      "line": "WCW",
+      "segment": "nWo",
+      "mix": "A",
+      "series_number": "3/6",
+      "casting": "Chevrolet Silverado",
+      "color": "black",
+      "deco": "nWo wolfpac graphics",
+      "wheel_type": "chrome",
+      "base": "metal",
+      "country": "China",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "WCW Silverado",
+        "nWo Silverado",
+        "Jada WCW truck"
+      ],
+      "condition_values": {
+        "loose": 13,
+        "mint_loose": 16,
+        "carded": 24,
+        "momc": 30,
+        "damaged_card": 19
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Jada Toys",
+      "year_release": 2005,
+      "line": "WCW",
+      "segment": "Nitro",
+      "mix": "B",
+      "series_number": "4/6",
+      "casting": "Ford F-150",
+      "color": "blue",
+      "deco": "Nitro logo side graphics",
+      "wheel_type": "chrome",
+      "base": "metal",
+      "country": "China",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "WCW F-150",
+        "Nitro F150",
+        "Jada WCW truck"
+      ],
+      "condition_values": {
+        "loose": 12.5,
+        "mint_loose": 15.5,
+        "carded": 23,
+        "momc": 29,
+        "damaged_card": 18.5
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Jada Toys",
+      "year_release": 2005,
+      "line": "WWE",
+      "segment": "SmackDown",
+      "mix": "C",
+      "series_number": "5/6",
+      "casting": "Jeep Wrangler",
+      "color": "silver",
+      "deco": "SmackDown star graphics",
+      "wheel_type": "chrome",
+      "base": "metal",
+      "country": "China",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "WWE Jeep",
+        "SmackDown Jeep",
+        "Jada WWE Jeep"
+      ],
+      "condition_values": {
+        "loose": 11.5,
+        "mint_loose": 14.5,
+        "carded": 21,
+        "momc": 27,
+        "damaged_card": 17
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    },
+    {
+      "brand": "Jada Toys",
+      "year_release": 2005,
+      "line": "WWE",
+      "segment": "Legend",
+      "mix": "D",
+      "series_number": "6/6",
+      "casting": "Volkswagen Beetle",
+      "color": "yellow",
+      "deco": "wrestler face graphics",
+      "wheel_type": "chrome",
+      "base": "metal",
+      "country": "China",
+      "card_region": "US",
+      "scale": "1:64",
+      "chase_type": "none",
+      "aliases": [
+        "WWE Beetle",
+        "Jada WWE Bug",
+        "Wrestling Bug"
+      ],
+      "condition_values": {
+        "loose": 10.5,
+        "mint_loose": 13.5,
+        "carded": 19,
+        "momc": 25,
+        "damaged_card": 15.5
+      },
+      "pricing_quality": "seed",
+      "verify_status": "phase0_seed"
+    }
+  ]
+}

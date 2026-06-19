@@ -1,15 +1,15 @@
 import kb from '../src/data/diecast-kb.json' with { type: 'json' }
 
 const records = kb.records || []
-if (kb.meta?.total_records < 11724) {
-  throw new Error(`Expected expanded KB baseline of at least 11724 records, saw ${kb.meta?.total_records}`)
+if (kb.meta?.total_records < 13024) {
+  throw new Error(`Expected expanded KB baseline of at least 13024 records, saw ${kb.meta?.total_records}`)
 }
 if (records.length !== kb.meta?.total_records) {
   throw new Error(`Record array does not match meta count: ${records.length} vs ${kb.meta?.total_records}`)
 }
 const families = new Set(records.map(record => `${record.brand}::${record.line}::${record.casting}`))
-if (families.size < 126) {
-  throw new Error(`Expected expanded KB baseline of at least 126 families, saw ${families.size}`)
+if (families.size < 139) {
+  throw new Error(`Expected expanded KB baseline of at least 139 families, saw ${families.size}`)
 }
 const priced = records.filter(record => record.condition_values && Object.values(record.condition_values).some(value => typeof value === 'number'))
 if (priced.length !== records.length) {

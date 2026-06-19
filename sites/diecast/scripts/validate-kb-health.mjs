@@ -1,8 +1,10 @@
 import kb from '../src/data/diecast-kb.json' with { type: 'json' }
 
-const ORIGINAL_RECORD_COUNT = 4124
+const ORIGINAL_RECORD_COUNT = 11724
+const ORIGINAL_FAMILY_COUNT = 126
 const MIN_GROWTH_RATE = 0.10
 const MIN_EXPANDED_RECORDS = Math.ceil(ORIGINAL_RECORD_COUNT * (1 + MIN_GROWTH_RATE))
+const MIN_EXPANDED_FAMILIES = Math.ceil(ORIGINAL_FAMILY_COUNT * (1 + MIN_GROWTH_RATE))
 const REQUIRED_FIELDS = [
   'diecast_id',
   'identity_key_fields',
@@ -94,6 +96,10 @@ const families = new Set(records.map(record => `${record.brand}::${record.line}:
 const brands = new Set(records.map(record => record.brand))
 const photoRecords = records.filter(record => record.photo_url)
 const photoFamilies = new Set(photoRecords.map(record => `${record.brand}::${record.line}::${record.casting}`))
+
+if (families.size < MIN_EXPANDED_FAMILIES) {
+  fail(`Expected at least 10% family growth from ${ORIGINAL_FAMILY_COUNT}; need ${MIN_EXPANDED_FAMILIES}, saw ${families.size}`)
+}
 
 console.log(
   `KB health passed: ${records.length} records (${Math.round(((records.length - ORIGINAL_RECORD_COUNT) / ORIGINAL_RECORD_COUNT) * 100)}% growth), ${families.size} families, ${brands.size} brands, ${photoRecords.length} photo records, ${photoFamilies.size} photo families.`

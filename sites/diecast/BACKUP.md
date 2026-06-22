@@ -5,7 +5,7 @@ This subtree is the Git-backed rollback and review source for the live GrailPuls
 - Live deploy working directory: `C:\Users\bubs9\diecast-site`
 - KB/taxonomy working vault: `C:\Users\bubs9\Fig Pinner Dev - Claude\hotwheels-matchbox-pinner`
 - Cloudflare Pages project: `grailpulse-diecast`
-- Exact-home cache-containment Worker: `grailpulse-diecast-home`
+- Homepage: direct Cloudflare Pages route; the temporary cache-containment Worker was retired after the corrected CSP reached the custom domain.
 
 ## Contents
 

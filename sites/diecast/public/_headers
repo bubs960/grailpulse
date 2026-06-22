@@ -1,17 +1,35 @@
+/*
+  Security headers for static Pages responses. Pages Functions set their own
+  response headers because _headers does not apply to Function responses.
+*/
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com; form-action 'self' mailto:; upgrade-insecure-requests
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/garage-catalog.json
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
 /series/*
-  Cache-Control: public, max-age=0, must-revalidate
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
 
 /coin/*
-  Cache-Control: public, max-age=0, must-revalidate
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
 
 /browse/*
-  Cache-Control: public, max-age=0, must-revalidate
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
 
 /methodology/*
-  Cache-Control: public, max-age=0, must-revalidate
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
 
 /privacy/*
-  Cache-Control: public, max-age=0, must-revalidate
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
 
 /sitemap.xml
-  Cache-Control: public, max-age=300, must-revalidate
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400

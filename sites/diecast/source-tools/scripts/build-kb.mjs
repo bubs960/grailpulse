@@ -9,6 +9,8 @@ const sourcePath = resolve(root, "kb/source.catalog.json");
 const generatedDir = resolve(root, "kb/generated");
 const exportDir = resolve(root, "export");
 const photoMapPath = resolve(root, "kb/photo-map.json");
+const ownerPhotoMapPath = resolve(root, "kb/owner-photo-map.json");
+const soldCompSummariesPath = resolve(root, "kb/sold-comp-summaries.json");
 const POPULAR_FAMILY_COUNT = 100;
 
 const POPULAR_FAMILY_TEMPLATES = [
@@ -1413,7 +1415,15 @@ function titleFor(row) {
 function build() {
   const source = JSON.parse(readFileSync(sourcePath, "utf8"));
   const photoMap = existsSync(photoMapPath) ? JSON.parse(readFileSync(photoMapPath, "utf8")) : {};
+  const ownerPhotoMap = existsSync(ownerPhotoMapPath) ? JSON.parse(readFileSync(ownerPhotoMapPath, "utf8")) : {};
+  const soldCompPayload = existsSync(soldCompSummariesPath)
+    ? JSON.parse(readFileSync(soldCompSummariesPath, "utf8"))
+    : { meta: {}, records: {} };
+  const soldCompRecords = soldCompPayload.records || {};
+  const minimumCompSample = Number(soldCompPayload.meta?.minimum_condition_sample || 3);
   const ids = new Set();
+  let compBackedRecords = 0;
+  let ownerPhotoRecords = 0;
   const records = [
     ...source.records,
     ...expandPopularFamilies()
@@ -1429,7 +1439,7 @@ function build() {
       research_basis: _researchBasis,
       ...publicRow
     } = row;
-    const photoMetadata = photoMap[diecast_id]
+    const marketplacePhotoMetadata = photoMap[diecast_id]
       ? {
           ...photoMap[diecast_id],
           ...(photoMap[diecast_id].photo_source === "mercari-scrape"
@@ -1437,6 +1447,27 @@ function build() {
             : {})
         }
       : {};
+    const ownerPhotoMetadata = ownerPhotoMap[diecast_id] || {};
+    if (ownerPhotoMetadata.photo_url) ownerPhotoRecords += 1;
+    const photoMetadata = {
+      ...marketplacePhotoMetadata,
+      ...ownerPhotoMetadata
+    };
+
+    const soldCompSummary = soldCompRecords[diecast_id];
+    const compConditions = soldCompSummary?.conditions || {};
+    const compBackedConditions = Object.entries(compConditions)
+      .filter(([, summary]) => Number(summary?.count || 0) >= minimumCompSample && Number.isFinite(Number(summary?.median_total)))
+      .map(([condition]) => condition);
+    const effectiveConditionValues = { ...(row.condition_values || {}) };
+    for (const condition of compBackedConditions) {
+      effectiveConditionValues[condition] = Number(compConditions[condition].median_total);
+    }
+    const effectivePricingQuality = compBackedConditions.length
+      ? (compBackedConditions.length === Object.keys(effectiveConditionValues).length ? "sold_comps" : "sold_comps_partial")
+      : row.pricing_quality;
+    const effectiveVerifyStatus = compBackedConditions.length ? "comp_backed" : row.verify_status;
+    if (compBackedConditions.length) compBackedRecords += 1;
 
     const searchable = unique([
       titleFor(row),
@@ -1455,13 +1486,24 @@ function build() {
       diecast_id,
       identity_key_fields: KEY_FIELDS,
       ...publicRow,
+      condition_values: effectiveConditionValues,
+      pricing_quality: effectivePricingQuality,
+      verify_status: effectiveVerifyStatus,
       title: titleFor(row),
       ...photoMetadata,
+      ...(compBackedConditions.length
+        ? {
+            sold_comp_summary: soldCompSummary,
+            comp_backed_conditions: compBackedConditions
+          }
+        : {}),
       searchable,
-      conditions: Object.keys(row.condition_values || {}),
+      conditions: Object.keys(effectiveConditionValues),
       flags: unique([
-        row.pricing_quality === "seed" ? "seed_price" : "",
-        row.verify_status === "phase0_seed" ? "needs_adversarial_verify" : ""
+        effectivePricingQuality === "seed" ? "seed_price" : "",
+        effectivePricingQuality === "sold_comps_partial" ? "partial_comp_coverage" : "",
+        effectivePricingQuality === "sold_comps" ? "sold_comp_backed" : "",
+        effectiveVerifyStatus === "phase0_seed" ? "needs_adversarial_verify" : ""
       ])
     };
   });
@@ -1493,7 +1535,9 @@ function build() {
       generated_at,
       total_records: records.length,
       identity_key_fields: KEY_FIELDS,
-      pricing_mode: source.meta.pricing_mode
+      pricing_mode: compBackedRecords ? "mixed_seed_and_sold_comps" : source.meta.pricing_mode,
+      comp_backed_records: compBackedRecords,
+      owner_photo_records: ownerPhotoRecords
     },
     records
   };

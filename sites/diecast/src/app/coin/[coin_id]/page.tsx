@@ -16,8 +16,9 @@ export async function generateMetadata({ params }: { params: Promise<{ coin_id: 
   const name = diecastDisplayName(record)
   return {
     title: `${name} Value & Condition Guide`,
-    description: `${name} diecast identity and value guide with condition seed values, card region, wheel/base details, chase status, and photo confidence.`,
+    description: `${name} phase-zero die-cast identity reference with modeled condition estimates, card region, wheel/base details, chase status, and photo confidence.`,
     alternates: { canonical: `/coin/${coin_id}/` },
+    robots: { index: false, follow: true },
   }
 }
 
@@ -49,7 +50,7 @@ export default async function DiecastDetailPage({ params }: { params: Promise<{ 
   ]
 
   return (
-    <main className="track-page">
+    <main id="main-content" className="track-page">
       <JsonLd data={breadcrumbSchema(record, family)} />
       <JsonLd data={productSchema(record, name, photoUrl, topValue)} />
       <div className="container">
@@ -75,13 +76,13 @@ export default async function DiecastDetailPage({ params }: { params: Promise<{ 
               <span>{record.color || 'Color unknown'}</span>
               <span>{record.card_region || 'Region unknown'}</span>
               <span>{photoQuality}</span>
-              {topValue > 0 && <span>Top seed ${topValue.toLocaleString()}</span>}
+              {topValue > 0 && <span>Top seed estimate ${topValue.toLocaleString()}</span>}
             </div>
             <p className="detail-lede">
-              Variant identity, card state, and condition value sit together here so a carded collector, loose-display builder, or peg hunter can compare the exact lane without flattening the casting.
+              Modeled identity, card state, and condition estimates sit together here so a carded collector, loose-display builder, or peg hunter can inspect the proposed lane without flattening the casting. Confirm the exact release independently.
             </p>
             <p className="data-freshness">
-              Seed pricing · {record.updated_at ? `updated ${formatDate(record.updated_at)}` : 'refresh pending'} · verify rare or chase examples against recent sold comps.
+              Modeled seed estimate · {record.updated_at ? `updated ${formatDate(record.updated_at)}` : 'refresh pending'} · verify rare or chase examples against recent sold comps.
             </p>
           </div>
         </section>
@@ -90,14 +91,14 @@ export default async function DiecastDetailPage({ params }: { params: Promise<{ 
           <div className="detail-main-stack">
             <DiecastActions id={record.diecast_id} />
             <section className="card">
-              <div className="section-head">Condition Timing</div>
+              <div className="section-head">Modeled condition ladder</div>
               {prices.length > 0 ? (
                 <table className="price-table">
                   <thead>
                     <tr>
                       <th>Condition</th>
                       <th>Meaning</th>
-                      <th>Seed value</th>
+                      <th>Seed estimate</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -164,7 +165,7 @@ function productSchema(record: DiecastRecord, name: string, photoUrl: string | u
       property('Card region', record.card_region),
       property('Chase type', record.chase_type || 'none'),
       property('Pricing mode', record.pricing_quality || 'seed'),
-      topValue > 0 ? property('Top seed value', `$${topValue.toLocaleString()}`) : null,
+      topValue > 0 ? property('Top seed estimate', `$${topValue.toLocaleString()}`) : null,
     ].filter(Boolean),
   }
 }
@@ -196,7 +197,7 @@ function formatDate(value: string): string {
 
 function photoQualityLabel(record: DiecastRecord): string {
   if (!record.photo_url) return 'Photo pending'
-  if (record.photo_match_level === 'variant_exact') return 'Exact variant photo'
+  if (record.photo_match_level === 'variant_exact') return 'Strong photo match'
   if (record.photo_match_level === 'family') return 'Family photo'
   return 'Reference photo'
 }
@@ -208,6 +209,8 @@ function photoSourceLabel(source?: string): string | null {
     'ebay-browse': 'eBay marketplace',
     seed: 'Seeded photo',
     manual: 'Manual photo',
+    'owner-submitted': 'Collector-owned photo',
+    'fair-use-editorial': 'Editorial reference photo',
   }
   return source ? labels[source] || source.replace(/-/g, ' ') : null
 }

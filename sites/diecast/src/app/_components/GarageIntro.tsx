@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function GarageIntro({ families }: Props) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const visible = families.slice(0, 3)
 
   return (
@@ -37,7 +37,7 @@ export default function GarageIntro({ families }: Props) {
             <span className="lane-light" aria-hidden="true" />
             <div>
               <strong>Welcome to the paddock</strong>
-              <p>Pick a lane: peg-hunt mainlines, premium Real Riders, carded condition comps, or oddball licensed diecast.</p>
+              <p>Pick a lane: peg-hunt mainlines, premium Real Riders, carded condition estimates, or oddball licensed diecast.</p>
             </div>
           </div>
 
@@ -45,9 +45,9 @@ export default function GarageIntro({ families }: Props) {
             {visible.map((family, index) => (
               <a key={family.series} href={`/series/${family.series}/`} className="garage-family-card">
                 <span className="bay-slot">BAY {index + 1}</span>
-                {family.photoUrl ? <img src={family.photoUrl} alt="" /> : <span className="garage-placeholder">No photo</span>}
+                {family.photoUrl ? <img src={family.photoUrl} alt={`${family.label} representative die-cast`} loading="lazy" /> : <span className="garage-placeholder">No photo</span>}
                 <strong>{family.label}</strong>
-                <small>{family.count} variants · {family.scale}</small>
+                <small>{family.count} reference records · {family.scale}</small>
               </a>
             ))}
           </div>

@@ -1,43 +1,23 @@
 import type { MetadataRoute } from 'next'
-import { getAllDiecastIds, getAllSeries, getDiecastPricing, getDiecastsBySeries } from '@/data/diecast'
+import { DIECAST_GENERATED_AT, getAllSeries, getDiecastsBySeries } from '@/data/diecast'
 
 const SITE_URL = 'https://diecast.grailpulse.com'
+const generated = DIECAST_GENERATED_AT ? new Date(DIECAST_GENERATED_AT) : new Date('2026-06-18T00:00:00Z')
 
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date()
-
   const staticRoutes: MetadataRoute.Sitemap = [
-    { path: '', changeFrequency: 'daily' as const, priority: 1.0 },
-    { path: '/browse/', changeFrequency: 'weekly' as const, priority: 0.85 },
-    { path: '/garage/', changeFrequency: 'weekly' as const, priority: 0.55 },
-    { path: '/methodology/', changeFrequency: 'monthly' as const, priority: 0.5 },
-    { path: '/privacy/', changeFrequency: 'yearly' as const, priority: 0.2 },
-  ].map(({ path, changeFrequency, priority }) => ({
-    url: `${SITE_URL}${path}`,
-    lastModified: now,
-    changeFrequency,
-    priority,
-  }))
+    { path: '', lastModified: generated, changeFrequency: 'weekly' as const, priority: 1.0 },
+    { path: '/browse/', lastModified: generated, changeFrequency: 'weekly' as const, priority: 0.9 },
+    { path: '/methodology/', lastModified: new Date('2026-06-22T00:00:00Z'), changeFrequency: 'monthly' as const, priority: 0.65 },
+    { path: '/privacy/', lastModified: new Date('2026-06-22T00:00:00Z'), changeFrequency: 'yearly' as const, priority: 0.3 },
+  ].map(({ path, ...entry }) => ({ url: `${SITE_URL}${path}`, ...entry }))
 
-  const seriesRoutes: MetadataRoute.Sitemap = getAllSeries()
-    .filter(series => getDiecastsBySeries(series).some(record => getDiecastPricing(record.diecast_id)))
-    .map(series => ({
-      url: `${SITE_URL}/series/${series}/`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    }))
+  const seriesRoutes: MetadataRoute.Sitemap = getAllSeries().map(series => {
+    const dates = getDiecastsBySeries(series).map(record => record.updated_at ? Date.parse(record.updated_at) : NaN).filter(Number.isFinite)
+    return { url: `${SITE_URL}/series/${series}/`, lastModified: dates.length ? new Date(Math.max(...dates)) : generated, changeFrequency: 'monthly' as const, priority: 0.7 }
+  })
 
-  const diecastRoutes: MetadataRoute.Sitemap = getAllDiecastIds()
-    .filter(id => getDiecastPricing(id))
-    .map(id => ({
-      url: `${SITE_URL}/coin/${id}/`,
-      lastModified: now,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    }))
-
-  return [...staticRoutes, ...seriesRoutes, ...diecastRoutes]
+  return [...staticRoutes, ...seriesRoutes]
 }

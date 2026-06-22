@@ -29,7 +29,29 @@ export interface DiecastRecord {
   photo_source?: string
   photo_match_level?: string
   photo_score?: number
+  photo_credit?: string
+  photo_rights_basis?: string
+  photo_source_url?: string | null
+  photo_permission_reference?: string | null
+  photo_editorial_rationale?: string | null
+  photo_checksum_sha256?: string
+  photo_approved_at?: string
+  sold_comp_summary?: {
+    overall?: SoldCompLane
+    conditions?: Record<string, SoldCompLane>
+  }
+  comp_backed_conditions?: string[]
   family_key?: string
+}
+
+export interface SoldCompLane {
+  count: number
+  median_total: number
+  p25_total?: number
+  p75_total?: number
+  first_sold_at?: string | null
+  last_sold_at?: string | null
+  source_count?: number
 }
 
 export interface FamilySummary {
@@ -47,7 +69,16 @@ export interface FamilySummary {
   updatedAt?: string
 }
 
-const payload = kb as { meta: { total_records: number, generated_at?: string, pricing_mode?: string }, records: DiecastRecord[] }
+const payload = kb as {
+  meta: {
+    total_records: number
+    generated_at?: string
+    pricing_mode?: string
+    comp_backed_records?: number
+    owner_photo_records?: number
+  }
+  records: DiecastRecord[]
+}
 export const DIECAST_META = payload.meta
 export const DIECAST_RECORDS: DiecastRecord[] = payload.records
 export const DIECAST_GENERATED_AT = payload.meta.generated_at
@@ -92,6 +123,7 @@ const FAMILY_SUMMARIES = new Map(
 )
 const ALL_MAKES = Array.from(new Set(DIECAST_RECORDS.map(record => record.brand))).sort()
 const ALL_SCALES = Array.from(new Set(DIECAST_RECORDS.map(record => record.scale || 'Unknown'))).sort()
+const ALL_LINES = Array.from(new Set(DIECAST_RECORDS.map(record => record.line).filter(Boolean))).sort()
 
 export function seriesLabel(series: string): string {
   const family = getFamilySummary(series)
@@ -153,6 +185,10 @@ export function getAllMakes(): string[] {
 
 export function getAllScales(): string[] {
   return ALL_SCALES
+}
+
+export function getAllLines(): string[] {
+  return ALL_LINES
 }
 
 export function getMakeSummaries() {

@@ -2,38 +2,25 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Privacy',
-  description: 'GrailPulse Die Cast MVP privacy notes.',
+  description: 'How GrailPulse Die Cast handles browser garage data, optional D1 garage sync, correction emails, image requests, and future advertising.',
+  alternates: { canonical: '/privacy/' },
 }
 
 export default function PrivacyPage() {
   return (
-    <main style={{ padding: '40px 0 80px' }}>
-      <div className="container" style={{ maxWidth: 800 }}>
-        <div className="eyebrow">Privacy</div>
-        <h1 style={{ fontSize: 'clamp(28px, 5vw, 40px)', fontWeight: 900, marginBottom: 24 }}>
-          GrailPulse Die Cast privacy notes
-        </h1>
-        <div className="card readable">
-          <h2>Current MVP</h2>
-          <p>
-            This diecast site is a public static catalog surface. It does not include accounts,
-            vault storage, subscriptions, or collection export in this MVP.
-          </p>
-          <h2>Catalog data</h2>
-          <p>
-            The pages render a test knowledge base with diecast identity fields, condition values,
-            and photo URLs used for vertical testing.
-          </p>
-          <h2>Advertising</h2>
-          <p>
-            GrailPulse Die Cast may show third-party advertising or affiliate links in future
-            placements. Those partners may use cookies, device signals, and impression or click
-            data to deliver and measure ads.
-          </p>
-          <h2>Contact</h2>
-          <p>Questions about GrailPulse privacy can be sent to privacy@grailpulse.com.</p>
-          <p className="updated">Last updated: June 7, 2026</p>
-        </div>
+    <main id="main-content" className="track-page">
+      <div className="container privacy-container">
+        <section className="page-hero compact-hero"><div className="eyebrow">Privacy</div><h1>Die Cast privacy notes</h1><p>The public guide can be browsed without creating a collector license. Garage sync is optional.</p></section>
+        <article className="card readable">
+          <h2>Public guide</h2><p>Catalog and methodology pages are public. Standard hosting and security logs may include IP address, browser and device information, requested URL, timestamps, and Cloudflare security signals.</p>
+          <h2>Local browser garage</h2><p>Parked cars, hunt-list targets, condition choices, and a local collector profile are stored in your browser using local storage. Clearing site data removes that local copy.</p>
+          <h2>Optional garage sync</h2><p>If you issue a collector license, GrailPulse stores the chosen handle, favorite lane, hashed garage key, parked-car IDs, hunt-list IDs, and timestamps in a Cloudflare D1 database. The plain garage key is returned to your browser so you can load the garage later; keep it private. Do not use sensitive personal information as a collector handle.</p>
+          <h2>Photos and external services</h2><p>Reference photos may be fetched from allowed marketplace image hosts through the GrailPulse photo cache. Those requests are made by the service rather than directly exposing every image host to the page.</p>
+          <h2>Corrections and email</h2><p>Correction links open your email application. If you send a message, the email provider receives the information you choose to include.</p>
+          <h2>Advertising and affiliate links</h2><p>No advertising placements are currently rendered on the Die Cast guide. Future ads or affiliate links will be disclosed when introduced; those partners may use their own measurement technologies.</p>
+          <h2>Contact</h2><p>Privacy questions can be sent to privacy@grailpulse.com.</p>
+          <p className="updated">Last updated: June 22, 2026</p>
+        </article>
       </div>
     </main>
   )

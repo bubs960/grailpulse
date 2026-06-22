@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "instructions": "Add approved entries only after the owner or rights basis is documented. Source files stay in owner-photos/inbox until applied."
+  },
+  "entries": []
+}

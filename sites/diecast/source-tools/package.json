@@ -4,8 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/build-kb.mjs",
+    "build": "node scripts/build-sold-comp-summaries.mjs && node scripts/build-kb.mjs",
     "serve": "node scripts/serve.mjs",
-    "test": "node scripts/smoke-test.mjs"
+    "test": "node scripts/validate-owner-photo-manifest.mjs && node scripts/validate-sold-comps.mjs && node scripts/smoke-test.mjs",
+    "photos:owner:validate": "node scripts/validate-owner-photo-manifest.mjs",
+    "photos:owner:apply": "node scripts/apply-owner-photos.mjs --apply",
+    "comps:queries": "node scripts/build-comp-query-queue.mjs",
+    "comps:validate": "node scripts/validate-sold-comps.mjs",
+    "comps:build": "node scripts/build-sold-comp-summaries.mjs"
   }
 }

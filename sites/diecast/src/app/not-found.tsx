@@ -1,26 +1,3 @@
 import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Not Found',
-  description: 'The requested diecast record could not be found.',
-}
-
-export default function NotFound() {
-  return (
-    <main style={{ padding: '80px 0 120px', textAlign: 'center' }}>
-      <div className="container" style={{ maxWidth: 620 }}>
-        <div className="eyebrow">Not found</div>
-        <h1 style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 900, marginBottom: 16 }}>
-          Diecast record not found
-        </h1>
-        <p style={{ marginBottom: 30 }}>
-          This MVP has a focused test KB. Browse the current families or jump back to the main index.
-        </p>
-        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="/" className="btn btn-accent">Home</a>
-          <a href="/browse/" className="btn btn-ghost">Browse</a>
-        </div>
-      </div>
-    </main>
-  )
-}
+export const metadata: Metadata = { title: 'Not Found', description: 'The requested die-cast page could not be found.', robots: { index: false, follow: true } }
+export default function NotFound() { return <main id="main-content" className="not-found-page"><div className="container not-found-inner"><div className="eyebrow">Empty garage bay</div><h1>That die-cast page is not here.</h1><p>The casting may have moved, the reference ID may be stale, or the family has not been added yet.</p><div className="hero-actions"><a href="/browse/" className="btn btn-accent">Browse castings</a><a href="/" className="btn btn-ghost">Back to garage</a></div></div></main> }

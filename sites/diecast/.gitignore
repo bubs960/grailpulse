@@ -4,3 +4,4 @@ out/
 .env.local
 .env.production
 .wrangler/
+public/garage-catalog.json

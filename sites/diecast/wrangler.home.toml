@@ -1,0 +1,8 @@
+name = "grailpulse-diecast-home"
+main = "workers/home-edge.ts"
+compatibility_date = "2026-06-22"
+workers_dev = false
+
+[[routes]]
+pattern = "diecast.grailpulse.com"
+zone_name = "grailpulse.com"

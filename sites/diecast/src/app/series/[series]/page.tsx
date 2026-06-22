@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ series: s
   const title = `${family.label} Variants & Values - ${family.make} Diecast Price Guide`
   return {
     title,
-    description: `${family.label} value guide with ${family.count} ${family.make} ${family.line} variant records, condition seed values, card regions, chase tags, wheel/base details, and photo confidence.`,
+    description: `${family.label} casting reference with ${family.count} phase-zero ${family.make} ${family.line} records and modeled condition estimates, card regions, chase tags, wheel/base details, and photo confidence.`,
     alternates: { canonical: `/series/${series}/` },
   }
 }
@@ -44,9 +44,8 @@ export default async function SeriesPage({ params }: { params: Promise<{ series:
   ]
 
   return (
-    <main className="track-page">
+    <main id="main-content" className="track-page">
       <JsonLd data={breadcrumbSchema(breadcrumbs)} />
-      <JsonLd data={itemListSchema(family, records, series)} />
       <div className="container">
         <nav className="breadcrumb">
           <a href="/">Die Cast</a>
@@ -55,15 +54,15 @@ export default async function SeriesPage({ params }: { params: Promise<{ series:
         </nav>
 
         <section className="series-hero collection-hero">
-          {family.photoUrl ? <img src={family.photoUrl} alt="" /> : <div className="photo-tile">No photo</div>}
+          {family.photoUrl ? <img src={family.photoUrl} alt={`${family.label} representative die-cast`} /> : <div className="photo-tile">No photo</div>}
           <div>
             <div className="eyebrow">Casting lane / {family.make} · {family.line}</div>
             <h1>{family.label}</h1>
             <div className="meta-row">
-              <span>{family.count} variant{family.count === 1 ? '' : 's'}</span>
+              <span>{family.count} reference record{family.count === 1 ? '' : 's'}</span>
               <span>{family.scale}</span>
               {family.yearLow > 0 && <span>{family.yearLow}-{family.yearHigh}</span>}
-              {family.topPrice > 0 && <span>Top seed ${family.topPrice.toLocaleString()}</span>}
+              {family.topPrice > 0 && <span>Top seed estimate ${family.topPrice.toLocaleString()}</span>}
               {family.updatedAt && <span>Updated {formatDate(family.updatedAt)}</span>}
             </div>
           </div>
@@ -76,10 +75,10 @@ export default async function SeriesPage({ params }: { params: Promise<{ series:
             <p>{context.collectorNote}</p>
           </article>
           <aside className="card">
-            <div className="section-head">Price Data Status</div>
+            <div className="section-head">Data and estimate status</div>
             <dl className="fact-list">
               <div>
-                <dt>Pricing mode</dt>
+                <dt>Estimate mode</dt>
                 <dd>{DIECAST_PRICING_MODE} values</dd>
               </div>
               <div>
@@ -97,7 +96,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ series:
             </dl>
             <div className="note-box">
               <strong>Trust note</strong>
-              <span>Seed values are early guide estimates, not a guarantee of current sold market value. Verify rare carded, chase, or high-value examples against recent sold comps before buying.</span>
+              <span>These are modeled phase-zero reference records, not a verified release checklist or sold market history. Confirm exact identity and recent completed sales independently before buying.</span>
               <span className="trust-actions">
                 <a href="/methodology/">Read methodology</a>
                 <a href={correctionHref(family.label, `/series/${series}/`)}>Report a bad match or wrong price</a>
@@ -132,7 +131,7 @@ function VariantPill({ record }: { record: DiecastRecord }) {
       <span className="variant-main">{record.color || 'Unknown color'}</span>
       <span>{record.card_region || 'region?'}</span>
       <span>{record.chase_type || 'standard'}</span>
-      {low ? <strong>${low.toLocaleString()}-{high.toLocaleString()}</strong> : <strong>No price</strong>}
+      {low ? <strong>${low.toLocaleString()}-{high.toLocaleString()}</strong> : <strong>No estimate</strong>}
     </a>
   )
 }
@@ -146,7 +145,7 @@ function familyContext(family: FamilyLike, records: DiecastRecord[]) {
   const chaseTypes = unique(records.map(record => record.chase_type).filter(Boolean) as string[])
     .filter(chase => !/^none$/i.test(chase))
   const photoCount = records.filter(record => record.photo_url).length
-  const top = family.topPrice > 0 ? ` Top seed value currently reaches $${family.topPrice.toLocaleString()}.` : ''
+  const top = family.topPrice > 0 ? ` Top modeled seed estimate currently reaches $${family.topPrice.toLocaleString()}.` : ''
   const yearText = family.yearLow && family.yearHigh
     ? family.yearLow === family.yearHigh ? `${family.yearLow}` : `${family.yearLow}-${family.yearHigh}`
     : 'unknown years'
@@ -154,29 +153,10 @@ function familyContext(family: FamilyLike, records: DiecastRecord[]) {
   return {
     photoCount,
     chaseCount: chaseTypes.length,
-    summary: `${family.label} is tracked here as a ${family.scale} ${family.make} ${family.line} casting lane across ${family.count} variant records from ${yearText}. The guide separates color, card region, wheel/base details, chase tags, and condition seed values so collectors can compare the exact version in hand instead of flattening every release into one generic listing.${top}`,
-    collectorNote: `Known signals on this page include ${listPhrase(colors.slice(0, 5)) || 'color variants'}, ${listPhrase(regions) || 'card regions'}, and ${listPhrase(wheelTypes.slice(0, 4)) || 'wheel types'}. ${chaseTypes.length ? `Chase tagging includes ${listPhrase(chaseTypes)}.` : 'No chase subtype is currently flagged for this family.'} Use the variant grid below to move from the family overview into the exact carded or loose record.`,
+    summary: `${family.label} is tracked here as a ${family.scale} ${family.make} ${family.line} casting lane across ${family.count} phase-zero reference records from ${yearText}. The guide separates color, card region, wheel/base details, chase tags, and modeled condition estimates so collectors can compare the exact version in hand instead of flattening every release into one generic listing.${top}`,
+    collectorNote: `Known signals on this page include ${listPhrase(colors.slice(0, 5)) || 'color variants'}, ${listPhrase(regions) || 'card regions'}, and ${listPhrase(wheelTypes.slice(0, 4)) || 'wheel types'}. ${chaseTypes.length ? `Chase tagging includes ${listPhrase(chaseTypes)}.` : 'No chase subtype is currently flagged for this family.'} Use the reference grid below to inspect modeled identity fields; do not treat it as an authoritative checklist.`,
   }
 }
-
-function itemListSchema(family: FamilyLike, records: DiecastRecord[], series: string) {
-  const listedRecords = records.slice(0, 50)
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: `${family.label} diecast variants`,
-    description: `${family.count} ${family.make} ${family.line} variant records for ${family.label}.`,
-    url: `${SITE_URL}/series/${series}/`,
-    numberOfItems: records.length,
-    itemListElement: listedRecords.map((record, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      url: `${SITE_URL}/coin/${record.diecast_id}/`,
-      name: diecastDisplayName(record),
-    })),
-  }
-}
-
 function breadcrumbSchema(items: Array<{ name: string, url: string }>) {
   return {
     '@context': 'https://schema.org',

@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "generated_at": "2026-06-22T17:18:28.032Z",
+    "minimum_condition_sample": 3,
+    "accepted_comp_count": 0,
+    "record_count": 0,
+    "policy": "USD single-item completed sales; exact diecast_id; match confidence >= 0.8; shipping included"
+  },
+  "records": {}
+}

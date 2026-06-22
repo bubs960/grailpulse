@@ -30,7 +30,7 @@ export default function DiecastActions({ id, defaultCondition = 'carded' }: Prop
     <div className="garage-action-panel">
       <div>
         <div className="section-head">Garage Actions</div>
-        <p>Park this exact variant in your garage or mark it as a future hunt target.</p>
+        <p>Park this reference record in your garage or mark it as a future hunt target.</p>
       </div>
 
       <div className="garage-action-row">

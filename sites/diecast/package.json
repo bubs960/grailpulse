@@ -7,6 +7,7 @@
     "build": "node scripts/build-garage-catalog.mjs && next build",
     "build:cf": "node scripts/build-garage-catalog.mjs && next build",
     "deploy:prep": "node scripts/prune-static-export-rsc.mjs",
+    "verify:photos": "node scripts/check-production-photo-proxy.mjs",
     "traffic:pulse": "node ../grailpinner-site/scripts/grailpulse-traffic-pulse.mjs",
     "start": "next start",
     "test": "node scripts/validate-kb-health.mjs && node scripts/smoke-test.mjs"
